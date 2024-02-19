@@ -1,4 +1,8 @@
-namespace {{__namespace}};
+﻿namespace {{__namespace}};
+attribute "fs_defaultCtor";
+attribute "fs_vector";
+attribute "fs_setter";
+attribute "fs_serializer";
 
 {{~for enum in __enums
     typeName = full_name enum
@@ -41,9 +45,9 @@ table KeyValue_{{declaring_type_name map.key_type}}_{{declaring_type_name map.va
 {{~end~}}
 
 {{~for table in __tables~}}
-table {{full_name table}} {
+table {{full_name table}} (fs_serializer:"Progressive") {
     // WARN! The name 'data_list' is used by FlatBuffersJsonExporter. don't modify it!
-    data_list:[{{declaring_type_name table.value_ttype}}](required);
+    data_list:[{{declaring_type_name table.value_ttype}}](fs_vector:"IIndexedVector");
 }
 
 root_type {{full_name table}};
