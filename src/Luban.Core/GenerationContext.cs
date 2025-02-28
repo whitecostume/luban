@@ -202,22 +202,14 @@ public class GenerationContext
         var sortedRecords = new List<Record>(originRecords);
 
         DefField keyField = table.IndexField;
-        if (keyField != null && (keyField.CType is TInt || keyField.CType is TLong))
+        if (keyField != null)
         {
             string keyFieldName = keyField.Name;
             sortedRecords.Sort((a, b) =>
             {
                 DType keya = a.Data.GetField(keyFieldName);
                 DType keyb = b.Data.GetField(keyFieldName);
-                switch (keya)
-                {
-                    case DInt ai:
-                        return ai.Value.CompareTo((keyb as DInt).Value);
-                    case DLong al:
-                        return al.Value.CompareTo((keyb as DLong).Value);
-                    default:
-                        throw new NotSupportedException();
-                }
+                return keya.CompareTo(keyb);
             });
         }
         return sortedRecords;

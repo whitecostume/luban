@@ -22,4 +22,14 @@ public class FlatBuffersTemplateExtension : ScriptObject
     {
         return type.IsNullable || type.Apply(IsFlatBuffersScalarTypeVisitor.Ins) ? "" : "(required)";
     }
+
+    public static string TypeFlag(DefField defField)
+    {
+        var table = defField.Assembly.ExportTables.Find(t => t.ValueType == defField.HostType.FullName);
+        if (table == null)
+        {
+            return "";
+        }
+        return defField.Name == table.Index ? "(key)" : "";
+    }
 }

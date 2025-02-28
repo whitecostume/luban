@@ -35,6 +35,9 @@ public class FlatBuffersDataTarget : DataTargetBase
             SkipValidation = false,
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         });
+
+        records = GenerationContext.ToSortByKeyDataList(table,records);
+        
         WriteAsTable(records, jsonWriter);
         jsonWriter.Flush();
         return CreateOutputFile($"{table.OutputDataFile}.{OutputFileExt}", DataUtil.StreamToBytes(ss));

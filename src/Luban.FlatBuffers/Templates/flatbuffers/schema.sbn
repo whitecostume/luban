@@ -27,7 +27,7 @@ union {{full_name bean}} {
 {{~if !bean.is_abstract_type ~}}
 table {{full_name bean}} {
     {{~for f in bean.hierarchy_export_fields ~}}
-    {{f.name}}:{{declaring_type_name f.ctype}}{{type_metadata f.ctype}};
+    {{f.name}}:{{declaring_type_name f.ctype}}{{type_metadata f.ctype}}{{type_flag f}};
     {{~end~}}
 }
 {{~end~}}

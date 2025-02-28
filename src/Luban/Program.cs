@@ -74,6 +74,21 @@ internal static class Program
 
     private static void Main(string[] args)
     {
+        // args =
+        // [
+        //     "-t",
+        //     "all",
+        //     "-c",
+        //     "flatbuffers",
+        //     "-d",
+        //     "flatbuffers-json",
+        //     "--conf",
+        //     "..\\..\\..\\luban.conf",
+        //     "-x",
+        //     "outputCodeDir=..\\..\\..\\output_code",
+        //     "-x",
+        //     "outputDataDir=..\\..\\..\\output"
+        // ];
         CommandOptions opts = ParseArgs(args);
         SetupApp(opts);
 
